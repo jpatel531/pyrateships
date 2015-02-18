@@ -3,6 +3,12 @@ from ship import Ship
 
 class Player(object):
 
+	@classmethod
+	def generate(klass, name1='Jamie', name2='Hamilton'):
+		players = (player1, player2) = (klass(name1), klass(name2))
+		player1.opponent, player2.opponent = player2, player1
+		return players
+
 	def __init__(self, name):
 		self.name = name
 		self.ships = Ship.generate_all(commander=self)

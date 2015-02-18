@@ -1,7 +1,6 @@
 from base import Coordinate, Grid, Player, Ship
 
-jamie = Player('Jamie')
-hamilton = Player('Hamilton')
+jamie, hamilton = Player.generate()
 
 grid = Grid()
 
