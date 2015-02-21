@@ -36,3 +36,27 @@ print grid.render(jamie, 'defending')
 print 
 print 'Ham looks at Jamies board after he hits'
 print grid.render(hamilton, 'attacking')
+
+print 'Ham places a ship'
+
+hamilton.place_ship('D', (5, 5))
+
+print
+print 'Ham looks at his board'
+print grid.render(hamilton, 'defending')
+
+print
+print 'Jam looks at Ham\'s board'
+print grid.render(jamie, 'attacking')
+
+print
+jamie.hit(5, 5)
+
+print 'Jamie looks at hams board'
+
+print grid.render(jamie, 'attacking')
+
+print 
+print 'ham looks at his board'
+
+print grid.render(hamilton, 'defending')
