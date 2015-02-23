@@ -14,18 +14,13 @@ class Coordinate(object):
 	def ship_commanders(self): 
 		return map(lambda ship: ship.commander, self.ships)		
 
-	def has_missed(self, player):
-		return (player in self.assailants) and (player.opponent not in self.ship_commanders())
-
-	def has_hit(self, player):
-		return (player in self.assailants) and (player.opponent in self.ship_commanders())
+	def result_of_shot(self, player, opponent):
+		return (player in self.assailants) and ('H' if opponent in self.ship_commanders() else 'M')
 
 	def has_ship(self, player):
-		return (player in self.ship_commanders())
+		return (player in self.ship_commanders()) and 'S'
 
-	def render(self, viewer, stance):
-		subject = viewer.opponent if stance is 'defending' else viewer
-		if (self.has_missed(subject)): return 'M'
-		if (self.has_hit(subject)): return 'H'
-		if stance is 'defending' and self.has_ship(viewer) : return 'S'
-		return '-'
+	def render(self, viewer, opponent, stance):
+		(subject, obj) = (opponent, viewer) if stance is 'defending' else (viewer, opponent)
+		mark = (self.result_of_shot(subject, obj) or self.has_ship(viewer)) if stance is 'defending' else self.result_of_shot(subject, obj)
+		return mark or '-'
